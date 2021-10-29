@@ -12,15 +12,21 @@ import acm.graphics.*;
 public class Images implements ImageConversions {
 
     public GImage flipHorizontal(GImage source) {
-        // TODO
+        
         int[][] pixels = source.getPixelArray();
         int[][] flip = new int[pixels.length][pixels[0].length];
+        for(int i = 0; i < flip.length; i++){
+            for(int j = 0; j < flip[i].length; j++){
+                int axis = flip[i].length - 1 - j;
+                flip[i][j] = pixels[i][axis];
+            }
+        }
         
-        return null;
+        return new GImage(flip);
     }
 
     public GImage rotateLeft(GImage source) {
-        // TODO
+        
         int[][] pixels = source.getPixelArray();
         int[][] left = new int[pixels[0].length][pixels.length];
         for(int i = 0; i < left.length; i++){
@@ -34,7 +40,7 @@ public class Images implements ImageConversions {
     }
 
     public GImage rotateRight(GImage source) {
-        // TODO
+        
         int[][] pixels = source.getPixelArray();
         int[][] right = new int[pixels[0].length][pixels.length];
         for(int i = 0; i < right.length; i++){
@@ -57,7 +63,7 @@ public class Images implements ImageConversions {
     }
 
     public GImage negative(GImage source) {
-        // TODO
+        
         int[][] pixels = source.getPixelArray();
         for(int[] p: pixels){
             for(int j = 0; j < p.length; j++){
