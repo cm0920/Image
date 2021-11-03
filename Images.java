@@ -45,7 +45,7 @@ public class Images implements ImageConversions {
         int[][] right = new int[pixels[0].length][pixels.length];
         for(int i = 0; i < right.length; i++){
             for(int j = 0; j < right[i].length; j++){
-                int r = pixels[0].length - 1 - j;
+                int r = pixels.length - 1 - j;
                 right[i][j] = pixels[r][i];
             }
         }
@@ -53,8 +53,18 @@ public class Images implements ImageConversions {
     }
 
     public GImage greenScreen(GImage source) {
-        // TODO
-        return null;
+        int[][] pixels = source.getPixelArray();
+        for(int[] p: pixels){
+            for(int j = 0; j < p.length; j++){
+                int r = GImage.getRed(p[j]);
+                int g = GImage.getGreen(p[j]);
+                int b = GImage.getBlue(p[j]);
+                if(g >= (2 * Math.max(r, b))){ // accounts that not every "green" pixel is java's Color.GREEN
+                    p[j] = GImage.createRGBPixel(r, g, b, 0);
+                }
+            }
+        }
+        return new GImage(pixels);
     }
 
     public GImage equalize(GImage source) {
@@ -78,6 +88,13 @@ public class Images implements ImageConversions {
 
     public GImage translate(GImage source, int dx, int dy) {
         // TODO
+        int[][] pixels = source.getPixelArray();
+        int[][] trans = new int[pixels.length][pixels[0].length];
+        for(int i = 0; i < pixels.length; i++){
+            for(int j = 0; j < pixels[0].length; j++){
+                int r = 0;
+            }
+        }
         return null;
     }
 
